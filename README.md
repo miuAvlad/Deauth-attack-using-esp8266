@@ -93,6 +93,15 @@ MAC address (BSSID). Since these addresses are not encrypted, they remain access
     ---- rest of code ----
     }
    - type network is a custom structure meant to store information about the individual networks
+  
+  ### Step 2. Packet Sniffer
 
+  During the development of the deauthentication attack implementation, I encountered challenges in locating the device's MAC address. Upon investigation, it became evident that the provided data structure includes a metadata header containing hardware-specific information. This header is analogous to the Radiotap header used in packet sniffing when operating in monitor mode, a concept I previously encountered while working on a firewall project.
 
-    
+  #### Data Structure and Metadata Header
+
+  - The metadata header embedded within the data structure serves to convey detailed hardware information necessary for accurate packet analysis. Similar to the Radiotap header, it provides essential context that facilitates the interpretation of captured packets. Understanding this structure was crucial for diagnosing why the device MAC address was not readily identifiable in the captured data.
+
+  - Comprehensive information regarding the format of the provided data structure is available in the ESP8266 documentation. This documentation outlines the various components of the data packets, including the metadata header, and explains how to parse and interpret the information contained within them. Familiarity with these specifications was essential for effectively utilizing the packet sniffer.
+
+  - To implement the packet sniffing functionality, I utilized a structure definition sourced from an existing GitHub repository dedicated to packet sniffing with the ESP8266 platform. Specifically, the esp8266_pcap_serial.ino file from the repository [z4ziggy/esp8266_pcap_serial](https://github.com/z4ziggy/esp8266_pcap_serial) provided the necessary struct definitions and parsing logic. This resource proved invaluable in overcoming the initial obstacle of identifying the device MAC address by offering a proven framework for packet capture and analysis.

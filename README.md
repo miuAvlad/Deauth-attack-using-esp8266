@@ -146,10 +146,12 @@ typedef struct
 ![MAC header format](image.png) 
 [for more information](https://mrncciew.com/2014/09/27/cwap-mac-header-frame-control/)
 
-  To sniff packets, the ESP8266 must be configured in promiscuous mode, operate in station mode, and have its channel set to the broadcast channel of the targeted Wi-Fi network. It is important to note that the ESP8266 cannot sniff packets across multiple channels simultaneously, which is a limitation of its hardware.
+#### Interpreting the Data
 
-  The callback function that manages the packets gets as input the pachet and the length of it.
-  Typically, the traffic between a device and the router includes not only data packets but also management frames such as Beacon frames and Probe Response frames. To accurately identify the relevant packets for the deauthentication attack, I implemented a filtering mechanism that checks whether any of the three MAC addresses in a captured packet differ from the router's BSSID. Upon further consideration, it would have been sufficient to perform this check using only two of the addresses.
+  - To sniff packets, the ESP8266 must be configured in promiscuous mode, operate in station mode, and have its channel set to the broadcast channel of the targeted Wi-Fi network. It is important to note that the ESP8266 cannot sniff packets across multiple channels simultaneously, which is a limitation of its hardware.
+
+  - The callback function that manages the packets gets as input the pachet and the length of it.
+  - Typically, the traffic between a device and the router includes not only data packets but also management frames such as Beacon frames and Probe Response frames. To accurately identify the relevant packets for the deauthentication attack, I implemented a filtering mechanism that checks whether any of the three MAC addresses in a captured packet differ from the router's BSSID. Upon further consideration, it would have been sufficient to perform this check using only two of the addresses.
   To optimize performance and ensure efficient processing, I limited the number of analyzed packets to 200. This threshold proved sufficient to capture the majority of devices connected to the targeted network.
 
   ```
@@ -186,7 +188,9 @@ void sniffer_function(uint8_t *buf, uint16_t len) {
 }
   ```
 
+### Step 3. Building and sending the deauth packet
 
+  
 
 
 

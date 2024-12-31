@@ -105,3 +105,43 @@ MAC address (BSSID). Since these addresses are not encrypted, they remain access
   - Comprehensive information regarding the format of the provided data structure is available in the ESP8266 documentation. This documentation outlines the various components of the data packets, including the metadata header, and explains how to parse and interpret the information contained within them. Familiarity with these specifications was essential for effectively utilizing the packet sniffer.
 
   - To implement the packet sniffing functionality, I utilized a structure definition sourced from an existing GitHub repository dedicated to packet sniffing with the ESP8266 platform. Specifically, the esp8266_pcap_serial.ino file from the repository [z4ziggy/esp8266_pcap_serial](https://github.com/z4ziggy/esp8266_pcap_serial) provided the necessary struct definitions and parsing logic. This resource proved invaluable in overcoming the initial obstacle of identifying the device MAC address by offering a proven framework for packet capture and analysis.
+  ```
+typedef struct
+{
+  signed rssi : 8;   /**< signal intensity of packet */
+  unsigned rate : 4; /**< data rate */
+  unsigned is_group : 1;
+  unsigned : 1;          /**< reserve */
+  unsigned sig_mode : 2; /**< 0:is not 11n packet; 1:is 11n packet */
+  unsigned legacy_length : 12;
+  unsigned damatch0 : 1;
+  unsigned damatch1 : 1;
+  unsigned bssidmatch0 : 1;
+  unsigned bssidmatch1 : 1;
+  unsigned mcs : 7;          /**< if is 11n packet, shows the modulation(range from 0 to 76) */
+  unsigned cwb : 1;          /**< if is 11n packet, shows if is HT40 packet or not */
+  unsigned HT_length : 16;   /**< reserve */
+  unsigned smoothing : 1;    /**< reserve */
+  unsigned not_sounding : 1; /**< reserve */
+  unsigned : 1;              /**< reserve */
+  unsigned aggregation : 1;  /**< Aggregation */
+  unsigned stbc : 2;         /**< STBC */
+  unsigned fec_coding : 1;   /**< Flag is set for 11n packets which are LDPC */
+  unsigned sgi : 1;          /**< SGI */
+  unsigned rxend_state : 8;
+  unsigned ampdu_cnt : 8; /**< ampdu cnt */
+  unsigned channel : 4;   /**< which channel this packet in */
+  unsigned : 4;           /**< reserve */
+  signed noise_floor : 8;
+} wifi_pkt_rx_ctrl_t;
+
+
+typedef struct
+{
+  wifi_pkt_rx_ctrl_t rx_ctrl; /**< metadata header */
+  uint8_t payload[0];         /**< Data or management payload. Length of payload is described by rx_ctrl.sig_len. Type of content determined by packet type argument of callback. */
+} wifi_promiscuous_pkt_t;
+  ```
+
+
+

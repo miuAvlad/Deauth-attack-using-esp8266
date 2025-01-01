@@ -219,6 +219,19 @@ void deauth_attack(network retea) {
 }
 ```
 
+# Upgrading
+
+  While the deauthentication attack implemented in this project is not inherently harmful on its own, it can serve as a crucial first step in executing more sophisticated attacks, such as the Evil Twin attack.
+
+  ## How the Evil Twin Attack Works 
+  - By successfully deauthenticating a device from its legitimate Access Point (AP), the attacker forces the device to disconnect from the network.
+  - After deauthenticating the target device, the attacker sets up a malicious Access Point that mirrors the legitimate AP's SSID (Service Set Identifier).
+  - Most devices are designed to automatically connect to the strongest available signal for a known SSID. By configuring the fake AP to transmit a stronger signal, the attacker can entice the device to connect to the malicious AP instead of the legitimate one.
+  - Utilizing advanced hardware enhances the attacker's ability to manage multiple connections, handle higher data throughput, and maintain stealth during the attack.
+  - Once the device connects to the fake AP, the attacker gains the ability to intercept and monitor the data transmitted by the user. This can include sensitive information such as login credentials, personal data, and other network traffic.
+
+
+  
 
   
 

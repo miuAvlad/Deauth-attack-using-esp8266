@@ -230,8 +230,11 @@ void deauth_attack(network retea) {
   - Utilizing advanced hardware enhances the attacker's ability to manage multiple connections, handle higher data throughput, and maintain stealth during the attack.
   - Once the device connects to the fake AP, the attacker gains the ability to intercept and monitor the data transmitted by the user. This can include sensitive information such as login credentials, personal data, and other network traffic.
 
+# Disclaimer 
 
-  
+This project is intended solely for educational and research purposes. I do not endorse or condone any unauthorized, malicious, or illegal use of the tools and techniques described herein. Unauthorized deauthentication attacks, network intrusions, or any other form of cyberattack are illegal and unethical. Users are responsible for ensuring that they have explicit permission to test or interact with any network or device using this project.
+
+By using this project, you agree to comply with all applicable laws and regulations. I am not liable for any misuse or damage resulting from the use of this project.
 
   
 

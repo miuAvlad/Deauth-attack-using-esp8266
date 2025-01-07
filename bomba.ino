@@ -242,7 +242,7 @@ void loop() {
       // printNetwork(x[i]);
     }
     sniff_packets(x[single_target]);
-    delay(4000);
+    
   }
   if (counter >= 200) {
     if (ok == true) {
